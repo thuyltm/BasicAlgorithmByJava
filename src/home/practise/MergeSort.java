@@ -1,7 +1,7 @@
 package home.practise;
 
-public class MergeSort {
-	public static int[] mergeSort(int[] data) {
+public class MergeSort implements SortTrategy{
+	private int[] mergeSort(int[] data) {
 		if (data.length == 1) {
 			return data;
 		} else {
@@ -14,12 +14,12 @@ public class MergeSort {
 			for (int i = 0; i < data2.length; i++) {
 				data2[i] = data[halfLength+i];
 			}
-			int[] sortedArr1 = MergeSort.mergeSort(data1);
-			int[] sortedArr2 = MergeSort.mergeSort(data2);
-			return MergeSort.mergeSort(sortedArr1, sortedArr2);
+			int[] sortedArr1 = this.mergeSort(data1);
+			int[] sortedArr2 = this.mergeSort(data2);
+			return this.mergeSort(sortedArr1, sortedArr2);
 		}
 	}
-	public static int[] mergeSort(int[] sortedArr1, int[] sortedArr2) {
+	private int[] mergeSort(int[] sortedArr1, int[] sortedArr2) {
 		int[] result = new int[sortedArr1.length + sortedArr2.length];
 		int index1 = 0;
 		int index2 = 0;
@@ -48,9 +48,8 @@ public class MergeSort {
 		}
 		return result;
 	}
-	public static void main(String[] args) {
-		int[] data = {1,5,6,2,4};
-		int[] result = MergeSort.mergeSort(data);
-		Utility.printArray(result);
+	@Override
+	public int[] sort(int[] data) {
+		return mergeSort(data);
 	}
 }

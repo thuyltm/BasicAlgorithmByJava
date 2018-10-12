@@ -1,8 +1,8 @@
 package home.practise;
 
-public class QuickSort {
-	public static void sort(int[] numbers, int start, int end) {
-		if (end - start < 1) return; 
+public class QuickSort implements SortTrategy {
+	private int[] sort(int[] numbers, int start, int end) {
+		if (end - start < 1) return numbers; 
 		int pivot = start + ((end - start) / 2);
 		int i = start;
 		int j = end;
@@ -25,10 +25,10 @@ public class QuickSort {
 		}
 		sort(numbers, start, pivot - 1);
 		sort(numbers, pivot + 1, end);
+		return numbers;
 	}
-	public static void main(String[] args) {
-		int[] numbers = {1,3,9,2,7,5};
-		sort(numbers, 0, numbers.length-1);
-		Utility.printArray(numbers);
+	@Override
+	public int[] sort(int[] data) {
+		return sort(data, 0, data.length-1);
 	}
 }
